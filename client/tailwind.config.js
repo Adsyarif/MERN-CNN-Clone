@@ -6,6 +6,9 @@ module.exports = {
       spacing: {
         "15%": "15%",
       },
+      grayscale: {
+        50: "50%",
+      },
     },
   },
   plugins: [],

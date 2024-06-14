@@ -5,7 +5,7 @@ const CardTextOnly = ({ link, text }) => {
     <Link to={link}>
       <div className="flex flex-col justify-start mb-4">
         <hr className="flex-grow border-t-1 border-gray-300 mb-4" />
-        <p className="self-start hover:text-gray-700 hover:underline text-base">
+        <p className="self-start decoration-1 hover:underline hover:underline-offset-4 text-base">
           {text}
         </p>
       </div>

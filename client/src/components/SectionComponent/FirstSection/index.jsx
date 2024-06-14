@@ -53,18 +53,17 @@ const FirstSection = () => {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row">
+      <div className="flex flex-col px-8 md:flex-row">
         <div className="w-full p-4 md:w-2/3">
-          <Link to="/new-link">
-            <div className="max-w-screen-md mx-auto p-8">
-              <h1 className="text-5xl font-bold mb-4 text-black text-center hover:underline">
-                Japan-South Korea Relations Strengthen Amid Historical
-                Resolutions and Security Cooperation
+          <Link to="/new-link" className="">
+            <div className="max-w-screen-md mx-auto">
+              <h1 className="text-3xl font-bold mb-4 text-black text-center decoration-1 hover:underline hover:underline-offset-8 hover:text-gray-500">
+                Japan-South Korea Relations StrengthenSecurity Cooperation
               </h1>
               <div className="max-w-screen-md mx-auto mb-3">
                 <div className="aspect-w-16 aspect-h-9">
                   <video
-                    className="w-full h-full rounded-sm"
+                    className="w-full h-full rounded-sm hover:grayscale-50"
                     autoPlay={true}
                     muted
                     playsInline
@@ -78,36 +77,34 @@ const FirstSection = () => {
                   </video>
                 </div>
               </div>
-              <h4 className="text-xl font-bold mb-2">
+              <h4 className="text-xl font-bold mb-2 decoration-1 hover:underline hover:underline-offset-4">
                 Japan and South Korea are enhancing their military cooperation
-                in response to North Korean missile tests and regional security
-                concerns.
+                in response regional security concerns
               </h4>
               <ul>
                 <li className="list-disc">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna.
+                  South Korea proposes a compensation plan for wartime forced
+                  labor, backed by South Korean companies.
                 </li>
                 <li className="list-disc">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam.
+                  Japan and South Korea agree to improve intelligence sharing on
+                  North Korean missile threats. Ut enim ad minim veniam.
                 </li>
                 <li className="list-disc">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore.
+                  Resuming talks on trade issues, especially semiconductor
+                  export controls imposed by Japan in 2019​.
                 </li>
                 <li className="list-disc">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut.
+                  Camp David Principles institutionalize ongoing trilateral
+                  cooperation on regional security.
                 </li>
                 <li className="list-disc">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore.
+                  Mixed reactions in South Korea to historical resolutions;
+                  President Yoon faces domestic opposition.
                 </li>
                 <li className="list-disc">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor.
+                  Enhanced Japan-South Korea relations address regional security
+                  threats, including from China and North Korea.
                 </li>
               </ul>
             </div>
@@ -134,7 +131,7 @@ const FirstSection = () => {
             </div>
           </Link>
           <div>
-            <div className="mb-2 mt-2 font-bold text-xl hover:underline">
+            <div className="mb-2 mt-2 font-bold text-xl decoration-1 hover:underline hover:underline-offset-4">
               Catch up on today global news
             </div>
             <div>

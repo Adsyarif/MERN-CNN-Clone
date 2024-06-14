@@ -7,7 +7,7 @@ const MidCard = ({ imageSrc, link, text, tag }) => {
       <div className="pb-2">
         <div className="relative w-305 h-171 group">
           <img
-            className="w-full h-full object-cover transition-transform transform group-hover:scale-100"
+            className="w-full h-full object-cover transition-transform transform group-hover:scale-100 hover:grayscale-50"
             src={imageSrc}
             alt={tag}
           />
@@ -20,7 +20,7 @@ const MidCard = ({ imageSrc, link, text, tag }) => {
           )}
         </div>
         <div>
-          <h4 className="text-xl font-bold mb-2 mt-2 hover:underline hover:text-gray-700">
+          <h4 className="text-xl font-bold mb-2 mt-2 decoration-1 hover:underline hover:underline-offset-4">
             {text}
           </h4>
         </div>
