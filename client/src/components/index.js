@@ -7,6 +7,9 @@ export {
   FourthSection,
   FifthSection,
   SixthSection,
+  SeventhSection,
+  EightSection,
+  NinthSection,
 } from "./SectionComponent";
 export { Header } from "./HeaderComponents";
 export {

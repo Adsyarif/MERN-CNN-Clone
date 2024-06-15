@@ -6,6 +6,9 @@ import {
   FourthSection,
   FifthSection,
   SixthSection,
+  SeventhSection,
+  EightSection,
+  NinthSection,
 } from "../../components";
 
 const Home = () => {
@@ -18,6 +21,9 @@ const Home = () => {
       <FourthSection />
       <FifthSection />
       <SixthSection />
+      <SeventhSection />
+      <EightSection />
+      <NinthSection />
     </div>
   );
 };
