@@ -10,10 +10,12 @@ export {
   SeventhSection,
   EightSection,
   NinthSection,
+  TenthSection,
 } from "./SectionComponent";
 export { Header } from "./HeaderComponents";
 export {
   BannerAdvertisement,
+  BigBannerAdvertisement,
   HeaderAdvertisement,
   SmallAdvertisement,
   VerticalBanner,

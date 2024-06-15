@@ -9,6 +9,7 @@ import {
   SeventhSection,
   EightSection,
   NinthSection,
+  TenthSection,
 } from "../../components";
 
 const Home = () => {
@@ -24,6 +25,7 @@ const Home = () => {
       <SeventhSection />
       <EightSection />
       <NinthSection />
+      <TenthSection />
     </div>
   );
 };
