@@ -1,4 +1,9 @@
-import { Header, FirstSection, SecondSection } from "../../components";
+import {
+  Header,
+  FirstSection,
+  SecondSection,
+  ThirdSection,
+} from "../../components";
 
 const Home = () => {
   return (
@@ -6,6 +11,7 @@ const Home = () => {
       <Header />
       <FirstSection />
       <SecondSection />
+      <ThirdSection />
     </div>
   );
 };

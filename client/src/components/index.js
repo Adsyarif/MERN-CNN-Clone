@@ -1,5 +1,9 @@
 export { BigCard, CardTextOnly, MidCard, SmallHorizontalCard } from "./Cards";
 export { ColumnHead } from "./misc";
-export { FirstSection, SecondSection } from "./SectionComponent";
+export { FirstSection, SecondSection, ThirdSection } from "./SectionComponent";
 export { Header } from "./HeaderComponents";
-export { HeaderAdvertisement, SmallAdvertisement } from "./Advertisement";
+export {
+  BannerAdvertisement,
+  HeaderAdvertisement,
+  SmallAdvertisement,
+} from "./Advertisement";
