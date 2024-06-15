@@ -53,7 +53,7 @@ const FirstSection = () => {
 
   return (
     <>
-      <div className="flex flex-col px-8 md:flex-row">
+      <div className="flex flex-col md:px-8 md:flex-row">
         <div className="w-full p-4 md:w-2/3">
           <Link to="/new-link" className="">
             <div className="max-w-screen-md mx-auto">
@@ -81,7 +81,7 @@ const FirstSection = () => {
                 Japan and South Korea are enhancing their military cooperation
                 in response regional security concerns
               </h4>
-              <ul>
+              <ul className="px-5">
                 <li className="list-disc">
                   South Korea proposes a compensation plan for wartime forced
                   labor, backed by South Korean companies.
