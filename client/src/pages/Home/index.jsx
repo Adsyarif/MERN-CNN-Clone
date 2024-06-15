@@ -3,6 +3,7 @@ import {
   FirstSection,
   SecondSection,
   ThirdSection,
+  FourthSection,
 } from "../../components";
 
 const Home = () => {
@@ -12,6 +13,7 @@ const Home = () => {
       <FirstSection />
       <SecondSection />
       <ThirdSection />
+      <FourthSection />
     </div>
   );
 };

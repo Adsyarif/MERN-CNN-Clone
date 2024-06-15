@@ -5,7 +5,7 @@ const ThirdSection = () => {
   const midCards = [
     {
       link: "/your-link-url",
-      imageSrc: "images/FourthSection/opinion.jpg",
+      imageSrc: "images/ThridSection/opinion.jpg",
       text: "Madonna’s ‘Celebration Tour’ is her most radical LGBTQ statement in decades",
       tag: "OPINION",
     },
@@ -15,26 +15,26 @@ const ThirdSection = () => {
   const smallHorizontalCard = [
     {
       link: "/your-link-url",
-      imageSrc: "images/FourthSection/12.jpg",
+      imageSrc: "images/ThridSection/12.jpg",
       text: "More women of color in the US are choosing birth centers over hospitals",
       tag: "",
     },
     {
       link: "/your-link-url",
-      imageSrc: "images/FourthSection/13.jpg",
+      imageSrc: "images/ThridSection/13.jpg",
       text: "First tyrannosaur fossil discovered with its last meal perfectly preserved in stomach",
       tag: "",
     },
 
     {
       link: "/your-link-url",
-      imageSrc: "images/FourthSection/14.jpg",
+      imageSrc: "images/ThridSection/14.jpg",
       text: "Salah scores 200th Liverpool goal to spark comeback win over Crystal Palace",
       tag: "",
     },
     {
       link: "/your-link-url",
-      imageSrc: "images/FourthSection/15.jpg",
+      imageSrc: "images/ThridSection/15.jpg",
       text: "Police officer borrows bike to chase drug dealer",
       tag: "",
     },
@@ -44,7 +44,7 @@ const ThirdSection = () => {
   const bigCard = [
     {
       link: "/your-link-url",
-      imageSrc: "images/FourthSection/21.jpg",
+      imageSrc: "images/ThridSection/21.jpg",
       text: "American teenage phenom Ilia Malinin makes more figure skating history",
       tag: "",
     },
@@ -55,13 +55,13 @@ const ThirdSection = () => {
   const smallHorizontalCard2 = [
     {
       link: "/your-link-url",
-      imageSrc: "images/FourthSection/22.jpg",
+      imageSrc: "images/ThridSection/22.jpg",
       text: "Retired NYPD cops visited Martin Luther King Jr.’s birth home to take a picture. They caught an alleged would-be arsonist",
       tag: "",
     },
     {
       link: "/your-link-url",
-      imageSrc: "images/FourthSection/23.jpg",
+      imageSrc: "images/ThridSection/23.jpg",
       text: "The world’s most spectacular coastlines",
       tag: "",
     },
@@ -72,7 +72,7 @@ const ThirdSection = () => {
   const midCards2 = [
     {
       link: "/your-link-url",
-      imageSrc: "images/FourthSection/31.jpg",
+      imageSrc: "images/ThridSection/31.jpg",
       text: "li MacGraw remembers the ‘generosity’ of her late ‘Love Story’ costar Ryan O’Neal",
       tag: "",
     },
@@ -82,25 +82,25 @@ const ThirdSection = () => {
   const smallHorizontalCard3 = [
     {
       link: "/your-link-url",
-      imageSrc: "images/FourthSection/32.jpg",
+      imageSrc: "images/ThridSection/32.jpg",
       text: "‘Bone biographies’ reveal what life was like for everyday medieval people",
       tag: "",
     },
     {
       link: "/your-link-url",
-      imageSrc: "images/FourthSection/33.jpg",
+      imageSrc: "images/ThridSection/33.jpg",
       text: "Could the most magical time of year be so full of loneliness, anger and stress?",
       tag: "",
     },
     {
       link: "/your-link-url",
-      imageSrc: "images/FourthSection/34.jpg",
+      imageSrc: "images/ThridSection/34.jpg",
       text: "How to care for a Christmas cactus",
       tag: "",
     },
     {
       link: "/your-link-url",
-      imageSrc: "images/FourthSection/35.jpg",
+      imageSrc: "images/ThridSection/35.jpg",
       text: "‘Sickest thing I’ve ever done’: Watch epic trick off skyscraper",
       tag: "",
     },
