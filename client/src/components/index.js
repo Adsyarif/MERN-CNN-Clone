@@ -5,6 +5,8 @@ export {
   SecondSection,
   ThirdSection,
   FourthSection,
+  FifthSection,
+  SixthSection,
 } from "./SectionComponent";
 export { Header } from "./HeaderComponents";
 export {
