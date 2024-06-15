@@ -1,4 +1,4 @@
-const Advertisement = () => {
+const HeaderAdvertisement = () => {
   return (
     <>
       <div className="hidden md:block">
@@ -15,4 +15,4 @@ const Advertisement = () => {
   );
 };
 
-export default Advertisement;
+export default HeaderAdvertisement;

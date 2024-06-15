@@ -1,9 +1,10 @@
-import { Advertisement, Navigation } from "../index.js";
+import { Navigation } from "../index";
+import { HeaderAdvertisement } from "../../index";
 
 const Header = () => {
   return (
     <>
-      <Advertisement />
+      <HeaderAdvertisement />
       <Navigation />
     </>
   );

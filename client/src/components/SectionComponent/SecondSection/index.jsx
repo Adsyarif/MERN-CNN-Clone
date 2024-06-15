@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
 import {
   CardTextOnly,
   MidCard,
   BigCard,
   SmallHorizontalCard,
   ColumnHead,
+  SmallAdvertisement,
 } from "../../index";
 
 const SecondSection = () => {
@@ -115,18 +115,11 @@ const SecondSection = () => {
         ))}
       </div>
       <div className="w-full md:w-1/3 p-4">
-        <Link to="/adv-link">
-          <div className="w-full h-64 group mb-4">
-            <div className="w-full h-full group">
-              <img
-                className="w-full h-full object-cover"
-                src="images/SecondSection/adv.jpg"
-                alt="adv"
-              />
-            </div>
-            <div className="text-xs">Advertisment</div>
-          </div>
-        </Link>
+        <SmallAdvertisement
+          link={"/adv-link"}
+          imageSrc={"images/SecondSection/adv.jpg"}
+          tag={"Advertisment"}
+        />
         <div>
           {smallHorizontalCard3.map((card, index) => (
             <SmallHorizontalCard key={index} {...card} />
