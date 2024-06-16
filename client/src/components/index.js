@@ -20,3 +20,5 @@ export {
   SmallAdvertisement,
   VerticalBanner,
 } from "./Advertisement";
+
+export { default as Footer } from "./Footer";
