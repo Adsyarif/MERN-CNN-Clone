@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { CategoryListFooter } from "../index";
 
 const Footer = ({ serachText }) => {
   const handleInputChange = (event) => {
@@ -164,50 +164,9 @@ const Footer = ({ serachText }) => {
         </button>
       </div>
       <div className="bg-black text-white p-4">
-        <div className="grid grid-cols-7 pb-4">
-          {categoriesRow1.map((category, index) => (
-            <div key={index} className="border-b-3 border-white">
-              <span className="font-bold text-lg">{category.title}</span>
-              <div className="flex flex-col flex-wrap mt-2 ">
-                {category.items.map((item, i) => (
-                  <NavLink
-                    key={i}
-                    to={`/${category.title.toLowerCase()}/${item.toLowerCase()}`}
-                    className={
-                      "py-1 text-sm leading-none hover:underline hover:underline-offset-2"
-                    }
-                    exact
-                  >
-                    {item}
-                  </NavLink>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="grid grid-cols-7 pb-4">
-          {categoriesRow2.map((category, index) => (
-            <div key={index} className="border-b-3 border-white">
-              <span className="font-bold text-lg">{category.title}</span>
-              <div className="flex flex-col flex-wrap mt-2 ">
-                {category.items.map((item, i) => (
-                  <NavLink
-                    key={i}
-                    to={`/${category.title.toLowerCase()}/${item.toLowerCase()}`}
-                    className={
-                      "py-1 text-sm leading-none hover:underline hover:underline-offset-2"
-                    }
-                    exact
-                  >
-                    {item}
-                  </NavLink>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+        <CategoryListFooter categoriesRow={categoriesRow1} />
+        <CategoryListFooter categoriesRow={categoriesRow2} />
       </div>
-      <div></div>
     </div>
   );
 };

@@ -21,4 +21,6 @@ export {
   VerticalBanner,
 } from "./Advertisement";
 
+export { CategoryListFooter } from "./List";
+
 export { default as Footer } from "./Footer";
