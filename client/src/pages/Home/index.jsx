@@ -10,7 +10,7 @@ import {
   EightSection,
   NinthSection,
   TenthSection,
-  Footer,
+  NavFooter,
 } from "../../components";
 
 const Home = () => {
@@ -27,7 +27,7 @@ const Home = () => {
       <EightSection />
       <NinthSection />
       <TenthSection />
-      <Footer />
+      <NavFooter />
     </div>
   );
 };

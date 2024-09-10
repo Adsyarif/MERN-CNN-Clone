@@ -1,6 +1,6 @@
 import {
   Header,
-  Footer,
+  NavFooter,
   SmallHorizontalCard,
   BannerAdvertisement,
   NinthSection,
@@ -242,7 +242,7 @@ const Article = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      <NavFooter />
     </>
   );
 };

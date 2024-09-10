@@ -33,4 +33,4 @@ export {
 export { CategoryListFooter } from "./common/List";
 export { AuthFooter } from "./Auth";
 
-export { default as Footer } from "./common/Footer";
+export { default as NavFooter } from "./common/Footer/NavFooter";

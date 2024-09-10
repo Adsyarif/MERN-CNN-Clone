@@ -1,6 +1,8 @@
-import { CategoryListFooter } from "../List/";
+import { CategoryListFooter } from "../../List";
+import FooterFeatures from "../FooterFeatures";
+import Footer from "../Footer";
 
-const Footer = ({ serachText }) => {
+const NavFooter = ({ serachText }) => {
   const handleInputChange = (event) => {
     console.log(event.target.value);
   };
@@ -130,7 +132,6 @@ const Footer = ({ serachText }) => {
         "Work for CNN",
       ],
     },
-    // Add other categories similarly
   ];
 
   return (
@@ -167,8 +168,10 @@ const Footer = ({ serachText }) => {
         <CategoryListFooter categoriesRow={categoriesRow1} />
         <CategoryListFooter categoriesRow={categoriesRow2} />
       </div>
+      <FooterFeatures />
+      <Footer />
     </div>
   );
 };
 
-export default Footer;
+export default NavFooter;
