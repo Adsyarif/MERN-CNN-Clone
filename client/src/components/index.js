@@ -1,5 +1,12 @@
-export { BigCard, CardTextOnly, MidCard, SmallHorizontalCard } from "./Cards";
-export { ColumnHead } from "./misc";
+export { ColumnHead } from "./common/misc";
+
+export {
+  BigCard,
+  CardTextOnly,
+  MidCard,
+  SmallHorizontalCard,
+} from "./common/Cards";
+
 export {
   FirstSection,
   SecondSection,
@@ -11,16 +18,19 @@ export {
   EightSection,
   NinthSection,
   TenthSection,
-} from "./SectionComponent";
-export { Header } from "./HeaderComponents";
+} from "./Home/SectionComponent";
+
+export { default as Header } from "./common/HeaderComponents/Header";
+
 export {
   BannerAdvertisement,
   BigBannerAdvertisement,
   HeaderAdvertisement,
   SmallAdvertisement,
   VerticalBanner,
-} from "./Advertisement";
+} from "./common/Advertisement";
 
-export { CategoryListFooter } from "./List";
+export { CategoryListFooter } from "./common/List";
+export { AuthFooter } from "./Auth";
 
-export { default as Footer } from "./Footer";
+export { default as Footer } from "./common/Footer";
