@@ -1,10 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Eye, EyeOff } from "react-feather";
 import { Footer, FooterFeatures } from "../../../components/common/Footer";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [passwordFocus, setIsPasswordFocus] = useState(false);
+  const [validationErrors, setValidationErrors] = useState(false);
+  const [currentAccount, setCurrentAccout] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [passwordValidation, setPasswordValidation] = useState({
+    hasLowerCase: false,
+    hasUpperCase: false,
+    hasNumber: false,
+    hasSymbol: false,
+    isLengthValid: false,
+  });
 
   const handleSubmit = (event) => {
     console.log(event.target);
@@ -12,6 +26,32 @@ const Register = () => {
   const handleEmailChange = (event) => {
     console.log(event.target.id);
   };
+  const handlePasswordChange = (event) => {
+    setCurrentAccout((prev) => ({
+      ...prev,
+      password: event.target.value,
+    }));
+  };
+
+  useEffect(() => {
+    const validatePassword = () => {
+      const hasLowerCase = /[a-z]/.test(currentAccount.password);
+      const hasUpperCase = /[A-Z]/.test(currentAccount.password);
+      const hasNumber = /[\d]/.test(currentAccount.password);
+      const hasSymbol = /[!@#$%^&*]/.test(currentAccount.password);
+      const isLengthValid = currentAccount.password.length >= 8;
+
+      setPasswordValidation({
+        hasLowerCase,
+        hasUpperCase,
+        hasNumber,
+        hasSymbol,
+        isLengthValid,
+      });
+    };
+
+    validatePassword(currentAccount.password);
+  }, [currentAccount.password]);
 
   return (
     <div className="h-screen">
@@ -45,7 +85,8 @@ const Register = () => {
                   required
                   placeholder="Email Address"
                   className="text-gray-900 border border-gray-800 rounded block w-full p-3 placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  onChange={handleEmailChange}
+                  onChange={() => handleEmailChange()}
+                  value={currentAccount.email}
                 />
               </div>
               <div className="mb-4 relative">
@@ -53,18 +94,83 @@ const Register = () => {
                   Password
                 </label>
                 <input
-                  type="password"
-                  id="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   autoComplete="password"
                   required
                   placeholder="Password"
                   className="text-gray-900 border border-gray-800 rounded block w-full p-3 placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  onChange={handleEmailChange}
+                  onChange={(e) => handlePasswordChange(e)}
+                  onKeyDown={() => {
+                    setIsPasswordFocus(true);
+                    setValidationErrors(false);
+                  }}
+                  value={currentAccount.password}
                 />
-                <span className="absolute right-3 top-1/4 transform-y-1/2 cursor-pointer z-20">
+                <span
+                  className="absolute right-3 top-1/4 transform-y-1/2 cursor-pointer z-20"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
                   {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
                 </span>
+                {passwordFocus && (
+                  <div
+                    className={`absolute top-full left-0 ${
+                      currentAccount.password ? "block" : "hidden"
+                    } z-[999] bg-white text-xs p-2 border rounded drop-shadow-md border-gray-500 z-100`}
+                  >
+                    <div
+                      className={`${
+                        passwordValidation.hasLowerCase
+                          ? "text-green-700"
+                          : "text-red-700"
+                      }`}
+                    >
+                      {passwordValidation.hasLowerCase ? "✓" : "✗"} At least one
+                      lowercase character.
+                    </div>
+                    <div
+                      className={`${
+                        passwordValidation.hasUpperCase
+                          ? "text-green-700"
+                          : "text-red-700"
+                      }`}
+                    >
+                      {passwordValidation.hasUpperCase ? "✓" : "✗"} At least one
+                      upperCase character.
+                    </div>
+                    <div
+                      className={`${
+                        passwordValidation.hasNumber
+                          ? "text-green-700"
+                          : "text-red-700"
+                      }`}
+                    >
+                      {passwordValidation.hasNumber ? "✓" : "✗"} At least one
+                      number character.
+                    </div>
+                    <div
+                      className={`${
+                        passwordValidation.hasSymbol
+                          ? "text-green-700"
+                          : "text-red-700"
+                      }`}
+                    >
+                      {passwordValidation.hasSymbol ? "✓" : "✗"} At least one
+                      symbol character.
+                    </div>
+                    <div
+                      className={`${
+                        passwordValidation.isLengthValid
+                          ? "text-green-700"
+                          : "text-red-700"
+                      }`}
+                    >
+                      {passwordValidation.isLengthValid ? "✓" : "✗"} At least
+                      have 8 length of characters.
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
             <div className="flex item-center justify-between my-2">
