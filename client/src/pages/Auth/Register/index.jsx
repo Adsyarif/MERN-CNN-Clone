@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Eye, EyeOff } from "react-feather";
 import { Footer, FooterFeatures } from "../../../components/common/Footer";
+import axios from "axios";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -20,17 +21,32 @@ const Register = () => {
     isLengthValid: false,
   });
 
-  const handleSubmit = (event) => {
-    console.log(event.target);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/register",
+        currentAccount.email,
+        currentAccount.password
+      );
+      const data = await response.json();
+    } catch (error) {
+      console.log(error);
+    }
   };
-  const handleEmailChange = (event) => {
-    console.log(event.target.id);
-  };
-  const handlePasswordChange = (event) => {
-    setCurrentAccout((prev) => ({
-      ...prev,
-      password: event.target.value,
-    }));
+
+  const handleRegisterInputChange = (event) => {
+    if (event.target.id === "password") {
+      setCurrentAccout((prev) => ({
+        ...prev,
+        password: event.target.value,
+      }));
+    } else if (event.target.id === "email-address") {
+      setCurrentAccout((prev) => ({
+        ...prev,
+        email: event.target.value,
+      }));
+    }
   };
 
   useEffect(() => {
@@ -52,6 +68,8 @@ const Register = () => {
 
     validatePassword(currentAccount.password);
   }, [currentAccount.password]);
+
+  console.log(currentAccount);
 
   return (
     <div className="h-screen">
@@ -85,7 +103,7 @@ const Register = () => {
                   required
                   placeholder="Email Address"
                   className="text-gray-900 border border-gray-800 rounded block w-full p-3 placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  onChange={() => handleEmailChange()}
+                  onChange={(e) => handleRegisterInputChange(e)}
                   value={currentAccount.email}
                 />
               </div>
@@ -95,12 +113,13 @@ const Register = () => {
                 </label>
                 <input
                   type={showPassword ? "text" : "password"}
+                  id="password"
                   name="password"
                   autoComplete="password"
                   required
                   placeholder="Password"
                   className="text-gray-900 border border-gray-800 rounded block w-full p-3 placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  onChange={(e) => handlePasswordChange(e)}
+                  onChange={(e) => handleRegisterInputChange(e)}
                   onKeyDown={() => {
                     setIsPasswordFocus(true);
                     setValidationErrors(false);
