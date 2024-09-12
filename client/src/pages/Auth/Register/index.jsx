@@ -7,7 +7,7 @@ import axios from "axios";
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [passwordFocus, setIsPasswordFocus] = useState(false);
-  const [validationErrors, setValidationErrors] = useState(false);
+  const [validationErrors, setValidationErrors] = useState("");
   const [currentAccount, setCurrentAccout] = useState({
     email: "",
     password: "",
@@ -23,14 +23,18 @@ const Register = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsPasswordFocus(false);
     try {
       const response = await axios.post("http://localhost:8080/api/register", {
         email: currentAccount.email,
         password: currentAccount.password,
       });
-      console.log(response.data);
+      alert(response.data.status.message);
     } catch (error) {
-      console.log(error);
+      if (error.status && error.response.data.status.code === 400) {
+        setValidationErrors(error.response.data.status.message);
+        console.log("error.response.data is: ", error.response.data);
+      }
     }
   };
 
@@ -68,7 +72,7 @@ const Register = () => {
     validatePassword(currentAccount.password);
   }, [currentAccount.password]);
 
-  console.log(currentAccount);
+  console.log(validationErrors);
 
   return (
     <div className="h-screen">
@@ -104,6 +108,10 @@ const Register = () => {
                   className="text-gray-900 border border-gray-800 rounded block w-full p-3 placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   onChange={(e) => handleRegisterInputChange(e)}
                   value={currentAccount.email}
+                  onKeyDown={() => {
+                    setValidationErrors("");
+                    setIsPasswordFocus(false);
+                  }}
                 />
               </div>
               <div className="mb-4 relative">
@@ -121,7 +129,7 @@ const Register = () => {
                   onChange={(e) => handleRegisterInputChange(e)}
                   onKeyDown={() => {
                     setIsPasswordFocus(true);
-                    setValidationErrors(false);
+                    setValidationErrors("");
                   }}
                   value={currentAccount.password}
                 />
@@ -201,6 +209,33 @@ const Register = () => {
                 </p>
               </div>
             </div>
+            {validationErrors && (
+              <div className="text-red-600 mt-8">
+                {typeof validationErrors === "object" ? (
+                  Object.keys(validationErrors).map((key) => {
+                    if (typeof validationErrors[key] === "object") {
+                      return Object.values(validationErrors[key]).map(
+                        (error, index) => (
+                          <p key={index} className="mb-2 text-sm">
+                            {error}
+                          </p>
+                        )
+                      );
+                    }
+                    // Jika validationErrors[key] bukan object, tampilkan langsung
+                    return (
+                      <p key={key} className="mb-2 text-sm">
+                        {validationErrors[key]}
+                      </p>
+                    );
+                  })
+                ) : (
+                  // Jika validationErrors bukan object, tampilkan langsung
+                  <p className="mb-2 text-sm">{validationErrors}</p>
+                )}
+              </div>
+            )}
+
             <div>
               <button
                 type="submit"
