@@ -1,8 +1,12 @@
 const express = require("express");
+const { connectDB } = require("./database/connection");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const dotenv = require("dotenv");
+dotenv.config({ path: "config.env" });
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-const cors = require("cors");
 app.use(
   cors({
     origin: "http://localhost:3000",
@@ -11,6 +15,8 @@ app.use(
   })
 );
 
+app.use(bodyParser.json());
+connectDB();
 app.use("/", require("./router/router"));
 
 const server = app.listen(PORT, () => {

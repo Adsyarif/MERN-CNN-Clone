@@ -24,12 +24,11 @@ const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/register",
-        currentAccount.email,
-        currentAccount.password
-      );
-      const data = await response.json();
+      const response = await axios.post("http://localhost:8080/api/register", {
+        email: currentAccount.email,
+        password: currentAccount.password,
+      });
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
