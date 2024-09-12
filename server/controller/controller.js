@@ -2,19 +2,19 @@ const response = require("../utils/apiResponse");
 const bcrypt = require("bcrypt");
 const { User } = require("../model/model");
 
-const validatePassword = (password) => {
-  const hasLowerCase = /[a-z]/.test(password);
-  const hasUpperCase = /[A-Z]/.test(password);
-  const hasNumber = /[0-9]/.test(password);
-  const hasSymbol = /[!@#$%^&*]/.test(password);
-  const isLengthValid = password.length >= 8;
-
-  return (
-    hasLowerCase && hasUpperCase && hasNumber && hasSymbol && isLengthValid
-  );
-};
-
 exports.register = async (req, res) => {
+  const validatePassword = (password) => {
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasSymbol = /[!@#$%^&*]/.test(password);
+    const isLengthValid = password.length >= 8;
+
+    return (
+      hasLowerCase && hasUpperCase && hasNumber && hasSymbol && isLengthValid
+    );
+  };
+
   const { email, password } = req.body;
   try {
     const isUserExist = await User.findOne({ email });
@@ -40,6 +40,7 @@ exports.register = async (req, res) => {
     });
 
     await newUser.save();
+
     response(res, 201, "User registered succressfully.");
   } catch (error) {
     if (error.name === "ValidationError") {
@@ -51,5 +52,5 @@ exports.register = async (req, res) => {
     }
   }
   console.log("Its a post request to register a user.");
-  console.log("req is: ", req.body);
+  // console.log("req is: ", req.body);
 };

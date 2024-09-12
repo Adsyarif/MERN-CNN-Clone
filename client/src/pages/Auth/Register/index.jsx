@@ -29,11 +29,13 @@ const Register = () => {
         email: currentAccount.email,
         password: currentAccount.password,
       });
-      alert(response.data.status.message);
+      const data = response.data;
+      console.log("Response data: ", data);
+      alert(data.status.message);
     } catch (error) {
       if (error.status && error.response.data.status.code === 400) {
         setValidationErrors(error.response.data.status.message);
-        console.log("error.response.data is: ", error.response.data);
+        console.log("error: ", error.response.data);
       }
     }
   };
@@ -72,7 +74,7 @@ const Register = () => {
     validatePassword(currentAccount.password);
   }, [currentAccount.password]);
 
-  console.log(validationErrors);
+  console.log(currentAccount);
 
   return (
     <div className="h-screen">

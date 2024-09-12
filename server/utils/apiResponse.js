@@ -1,4 +1,4 @@
-const apiResponse = (res, statusCode, message, data = null) => {
+const apiResponse = function (res, statusCode, message, data = null) {
   return res.status(statusCode).json({
     status: {
       code: statusCode,
