@@ -1,6 +1,10 @@
 const response = require("../utils/apiResponse");
 const bcrypt = require("bcrypt");
-const { User } = require("../model/model");
+const { User } = require("../model/user");
+
+exports.login = async (req, res) => {
+  console.log("Form login");
+};
 
 exports.register = async (req, res) => {
   const validatePassword = (password) => {
@@ -52,5 +56,5 @@ exports.register = async (req, res) => {
     }
   }
   console.log("Its a post request to register a user.");
-  // console.log("req is: ", req.body);
+  console.log("req is: ", req.body);
 };

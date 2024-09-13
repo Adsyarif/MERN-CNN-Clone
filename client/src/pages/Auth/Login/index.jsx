@@ -5,7 +5,7 @@ import { Footer, FooterFeatures } from "../../../components/common/Footer";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Register = () => {
+const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [passwordFocus, setIsPasswordFocus] = useState(false);
   const [validationErrors, setValidationErrors] = useState("");
@@ -27,7 +27,7 @@ const Register = () => {
     event.preventDefault();
     setIsPasswordFocus(false);
     try {
-      const response = await axios.post("http://localhost:8080/api/register", {
+      const response = await axios.post("http://localhost:8080/api/login", {
         email: currentAccount.email,
         password: currentAccount.password,
       });
@@ -84,15 +84,14 @@ const Register = () => {
           <div className="flex flex-col items-center">
             <img src="/images/Header/logo.png" className="w-auto h-12 " />
             <h2 className="mt-6 text-center text-2xl font-extrabold text-gray-900">
-              Create your CNN account
+              Log in to your CNN account
             </h2>
             <div className="text-sm mt-2">
               <Link
-                to="/login"
+                to="/register"
                 className="font-medium text-black hover:text-gray-700"
               >
-                Already have account{" "}
-                <span onClick={() => navigate("/login")}>Sign In</span>
+                Don't have an account? <span>Sign up</span>
               </Link>
             </div>
           </div>
@@ -114,7 +113,6 @@ const Register = () => {
                   value={currentAccount.email}
                   onKeyDown={() => {
                     setValidationErrors("");
-                    setIsPasswordFocus(false);
                   }}
                 />
               </div>
@@ -132,7 +130,6 @@ const Register = () => {
                   className="text-gray-900 border border-gray-800 rounded block w-full p-3 placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   onChange={(e) => handleRegisterInputChange(e)}
                   onKeyDown={() => {
-                    setIsPasswordFocus(true);
                     setValidationErrors("");
                   }}
                   value={currentAccount.password}
@@ -143,74 +140,16 @@ const Register = () => {
                 >
                   {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
                 </span>
-                {passwordFocus && (
-                  <div
-                    className={`absolute top-full left-0 ${
-                      currentAccount.password ? "block" : "hidden"
-                    } z-[999] bg-white text-xs p-2 border rounded drop-shadow-md border-gray-500 z-100`}
-                  >
-                    <div
-                      className={`${
-                        passwordValidation.hasLowerCase
-                          ? "text-green-700"
-                          : "text-red-700"
-                      }`}
-                    >
-                      {passwordValidation.hasLowerCase ? "✓" : "✗"} At least one
-                      lowercase character.
-                    </div>
-                    <div
-                      className={`${
-                        passwordValidation.hasUpperCase
-                          ? "text-green-700"
-                          : "text-red-700"
-                      }`}
-                    >
-                      {passwordValidation.hasUpperCase ? "✓" : "✗"} At least one
-                      upperCase character.
-                    </div>
-                    <div
-                      className={`${
-                        passwordValidation.hasNumber
-                          ? "text-green-700"
-                          : "text-red-700"
-                      }`}
-                    >
-                      {passwordValidation.hasNumber ? "✓" : "✗"} At least one
-                      number character.
-                    </div>
-                    <div
-                      className={`${
-                        passwordValidation.hasSymbol
-                          ? "text-green-700"
-                          : "text-red-700"
-                      }`}
-                    >
-                      {passwordValidation.hasSymbol ? "✓" : "✗"} At least one
-                      symbol character.
-                    </div>
-                    <div
-                      className={`${
-                        passwordValidation.isLengthValid
-                          ? "text-green-700"
-                          : "text-red-700"
-                      }`}
-                    >
-                      {passwordValidation.isLengthValid ? "✓" : "✗"} At least
-                      have 8 length of characters.
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
             <div className="flex item-center justify-between my-2">
               <div className="flex text-sm items-center">
-                <p className="text-xs text-black-600 hover:text-gray-400">
-                  By clicking 'Create account' you agree to the Terms of Use and
-                  you acknowledge that you have read our Privacy and Policy. You
-                  further acknowledge that CNN and WarnerMedia affiliates mau
-                  use your email address for marketing, ads and other offers.
-                </p>
+                <Link
+                  to="/forgot-password"
+                  className="text-xs text-black-600 hover:text-gray-400"
+                >
+                  Forgot Password?
+                </Link>
               </div>
             </div>
             {validationErrors && (
@@ -243,15 +182,8 @@ const Register = () => {
                 type="submit"
                 className="w-full flex justify-center py-3 px-4 border border-transparent text-md font-bold rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none"
               >
-                Create account
+                Sign in
               </button>
-            </div>
-            <div className="flex item-center justify-between my-2">
-              <div className="flex text-sm items-center">
-                <p className="text-xs text-black-600 hover:text-gray-400">
-                  To opt-out at any time, see options available here.
-                </p>
-              </div>
             </div>
           </form>
         </div>
@@ -264,4 +196,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
