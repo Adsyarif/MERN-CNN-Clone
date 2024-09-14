@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const FooterFeatures = () => {
   const contentFooter = [
@@ -19,11 +19,13 @@ const FooterFeatures = () => {
     <div className="bg-black w-full py-8 px-5 flex flex-col items-start text-white border-t border-b border-gray-700">
       <div className="w-full flex items-center justify-between">
         <div className="flex items-center">
-          <img
-            src="images/Header/logo.png"
-            alt=""
-            className="w-auto h-8 mr-4"
-          />
+          <Link to={"/"}>
+            <img
+              src="images/Header/logo.png"
+              alt=""
+              className="w-auto h-8 mr-4"
+            />
+          </Link>
           <div className="font-bold text-2xl">ID</div>
         </div>
         <div className="flex items-center">

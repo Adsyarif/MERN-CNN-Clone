@@ -7,25 +7,17 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [passwordFocus, setIsPasswordFocus] = useState(false);
   const [validationErrors, setValidationErrors] = useState("");
   const [currentAccount, setCurrentAccout] = useState({
     email: "",
     password: "",
-  });
-
-  const [passwordValidation, setPasswordValidation] = useState({
-    hasLowerCase: false,
-    hasUpperCase: false,
-    hasNumber: false,
-    hasSymbol: false,
-    isLengthValid: false,
+    isRegister: false,
   });
 
   const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setIsPasswordFocus(false);
+
     try {
       const response = await axios.post("http://localhost:8080/api/login", {
         email: currentAccount.email,
@@ -34,7 +26,14 @@ const Login = () => {
       const data = response.data;
       console.log("Response data: ", data);
       alert(data.status.message);
-      navigate("/login");
+      setCurrentAccout((prev) => ({
+        ...prev,
+        isRegister: true,
+      }));
+      if (currentAccount.isRegister) {
+        navigate("/");
+      }
+      console.log(currentAccount);
     } catch (error) {
       if (error.status && error.response.data.status.code === 400) {
         setValidationErrors(error.response.data.status.message);
@@ -56,26 +55,6 @@ const Login = () => {
       }));
     }
   };
-
-  useEffect(() => {
-    const validatePassword = () => {
-      const hasLowerCase = /[a-z]/.test(currentAccount.password);
-      const hasUpperCase = /[A-Z]/.test(currentAccount.password);
-      const hasNumber = /[\d]/.test(currentAccount.password);
-      const hasSymbol = /[!@#$%^&*]/.test(currentAccount.password);
-      const isLengthValid = currentAccount.password.length >= 8;
-
-      setPasswordValidation({
-        hasLowerCase,
-        hasUpperCase,
-        hasNumber,
-        hasSymbol,
-        isLengthValid,
-      });
-    };
-
-    validatePassword(currentAccount.password);
-  }, [currentAccount.password]);
 
   return (
     <div className="h-screen">

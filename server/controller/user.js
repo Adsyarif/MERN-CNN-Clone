@@ -3,7 +3,30 @@ const bcrypt = require("bcrypt");
 const { User } = require("../model/user");
 
 exports.login = async (req, res) => {
-  console.log("Form login");
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    console.log(user);
+
+    if (!user) {
+      return response(res, 400, "Invalid credential.");
+    }
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      return response(res, 400, "Invalid credential.");
+    }
+    response(res, 200, "Login successful.");
+
+    if (user.role) {
+      req.session.userRole = user.role;
+      req.session.save();
+    }
+  } catch (error) {
+    return response(res, 500, "Internal server error.");
+  }
+  console.log("Its a post request to login a user.");
+  console.log("req is: ", req.body);
 };
 
 exports.register = async (req, res) => {
@@ -54,6 +77,7 @@ exports.register = async (req, res) => {
       }
       return response(res, 400, validationErrors);
     }
+    response(res, 500, "Internal server error.");
   }
   console.log("Its a post request to register a user.");
   console.log("req is: ", req.body);
