@@ -1,4 +1,4 @@
-import { Home, Article, Register, Login } from "./pages";
+import { Home, Article, Register, Login, Admin } from "./pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const App = () => {
@@ -10,6 +10,7 @@ const App = () => {
           <Route path="/article" element={<Article />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/Admin" element={<Admin />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -26,8 +26,9 @@ app.use(
   })
 );
 
-app.use(bodyParser.json());
 connectDB();
+
+app.use(bodyParser.json());
 app.use("/", require("./router/router"));
 
 const server = app.listen(PORT, () => {

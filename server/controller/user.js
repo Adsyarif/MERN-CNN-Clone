@@ -2,26 +2,34 @@ const response = require("../utils/apiResponse");
 const bcrypt = require("bcrypt");
 const { User } = require("../model/user");
 
+exports.isAuth = async (req, res) => {
+  const userId = req.session.userId;
+  console.log("Auth session is: ", req.session);
+  response(res, 200, `Success get user: ${userId}`, { userId: userId });
+};
+
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email });
-    console.log(user);
 
+    const user = await User.findOne({ email });
     if (!user) {
       return response(res, 400, "Invalid credential.");
     }
-    const passwordMatch = await bcrypt.compare(password, user.password);
 
+    const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
       return response(res, 400, "Invalid credential.");
     }
-    response(res, 200, "Login successful.");
+
+    req.session.userId = user._id;
 
     if (user.role) {
       req.session.userRole = user.role;
-      req.session.save();
     }
+    req.session.save();
+    console.log("req.session: ", req.session);
+    response(res, 200, "Login successful.");
   } catch (error) {
     return response(res, 500, "Internal server error.");
   }

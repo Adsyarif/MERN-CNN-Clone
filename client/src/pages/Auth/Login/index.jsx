@@ -19,10 +19,19 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:8080/api/login", {
-        email: currentAccount.email,
-        password: currentAccount.password,
-      });
+      const response = await axios.post(
+        "http://localhost:8080/api/login",
+        {
+          email: currentAccount.email,
+          password: currentAccount.password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
       const data = response.data;
       console.log("Response data: ", data);
       alert(data.status.message);
@@ -33,7 +42,6 @@ const Login = () => {
       if (currentAccount.isRegister) {
         navigate("/");
       }
-      console.log(currentAccount);
     } catch (error) {
       if (error.status && error.response.data.status.code === 400) {
         setValidationErrors(error.response.data.status.message);
