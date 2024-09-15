@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Sidebar } from "../../components";
 
 const Admin = () => {
   axios
@@ -15,9 +16,12 @@ const Admin = () => {
       console.log(error);
     });
   return (
-    <>
-      <div>Admiin Page</div>
-    </>
+    <div className="flex flex-col min-h-screen max-h-full dashboard w-full">
+      <div>
+        <Sidebar />
+        <div></div>
+      </div>
+    </div>
   );
 };
 
