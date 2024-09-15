@@ -64,7 +64,7 @@ const Header = () => {
           </div>
           <span className="text-gray-900 mr-4">Welcome, Admin!</span>
           <img
-            src="/images/header/avatar-black.png"
+            src="/images/Header/avatar-black.png"
             className="h-8 w-8 rounded-full"
             alt=""
           />

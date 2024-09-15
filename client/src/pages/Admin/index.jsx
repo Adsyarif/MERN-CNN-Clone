@@ -1,6 +1,7 @@
 import axios from "axios";
-import { Sidebar, Dasboard, Header } from "../../components/Admin";
+import { Sidebar, Header } from "../../components/Admin";
 import { Route, Routes } from "react-router-dom";
+import Dasboard from "./Dashboard";
 
 const Admin = () => {
   axios
