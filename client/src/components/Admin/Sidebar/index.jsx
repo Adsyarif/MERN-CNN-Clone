@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-function Sidebar() {
+
+const Sidebar = () => {
   const [accordion, setAccordion] = useState({
     newsAccordion: false,
     userAccordion: false,
@@ -15,10 +16,7 @@ function Sidebar() {
       <nav className="pt-5">
         <ul>
           <li className="mb-8 mt-16 hover:bg-gray-500 p-1 transition duration-300 ease-in-out">
-            <Link
-              to="/admin/dashboard"
-              className="  flex transition text-center"
-            >
+            <Link to="/admin/" className="  flex transition text-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -280,6 +278,6 @@ function Sidebar() {
       </nav>
     </aside>
   );
-}
+};
 
 export default Sidebar;

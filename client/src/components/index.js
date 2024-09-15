@@ -34,5 +34,3 @@ export { CategoryListFooter } from "./common/List";
 export { AuthFooter } from "./Auth";
 
 export { default as NavFooter } from "./common/Footer/NavFooter";
-
-export { Sidebar } from "./Admin";

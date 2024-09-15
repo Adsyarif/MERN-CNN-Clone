@@ -1,5 +1,6 @@
 import axios from "axios";
-import { Sidebar } from "../../components";
+import { Sidebar, Dasboard, Header } from "../../components/Admin";
+import { Route, Routes } from "react-router-dom";
 
 const Admin = () => {
   axios
@@ -17,9 +18,14 @@ const Admin = () => {
     });
   return (
     <div className="flex flex-col min-h-screen max-h-full dashboard w-full">
-      <div>
+      <div className="flex">
         <Sidebar />
-        <div></div>
+        <div>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Dasboard />} />
+          </Routes>
+        </div>
       </div>
     </div>
   );
