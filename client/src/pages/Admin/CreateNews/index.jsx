@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TextEditor } from "../../../components/Admin";
 
 const CreateNews = () => {
+  const [error, setError] = useState("");
   const [newsOptions, setNewsOptions] = useState({
     newsTypes: [],
     newsCategories: [],
@@ -10,7 +11,7 @@ const CreateNews = () => {
   const [article, setArticles] = useState({
     title: "",
     selectedNewsType: "",
-    fileName: "",
+    fileName: {},
     selectedNewsCategory: "",
     selectedNewsSubCategory: "",
     author: "",
@@ -37,6 +38,18 @@ const CreateNews = () => {
         }));
         break;
       case "fileName":
+        const file = event.target.files[0];
+        const maxFileSizeInBytes = 50 * 1024 * 1024;
+        if (file) {
+          if (file.size > maxFileSizeInBytes) {
+            setError("File size is exceeds the maximum allowed size.");
+            break;
+          }
+
+          const fileType = file.type.split("/")[0];
+          if (fileType) {
+          }
+        }
         setArticles((prev) => ({
           ...prev,
           fileName: event.target.value,
