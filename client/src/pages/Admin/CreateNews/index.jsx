@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextEditor } from "../../../components/Admin";
 
 const CreateNews = () => {
   const [error, setError] = useState("");
+  const [previewUrl, setPreviewUrl] = useState("");
   const [newsOptions, setNewsOptions] = useState({
     newsTypes: [],
     newsCategories: [],
@@ -11,19 +12,42 @@ const CreateNews = () => {
   const [article, setArticles] = useState({
     title: "",
     selectedNewsType: "",
-    fileName: {},
+    selectedMedia: {
+      selectedFile: "",
+      fileType: "",
+      fileSize: "",
+    },
     selectedNewsCategory: "",
     selectedNewsSubCategory: "",
     author: "",
     content: "",
   });
 
+  useEffect(() => {
+    return () => {
+      if (previewUrl.startsWith("blob:")) {
+        URL.revokeObjectURL(previewUrl);
+      }
+    };
+  }, [previewUrl]);
+
   const handleSubmit = async (event) => {
-    console.log(event.target);
+    event.preventDefault();
+    // Handle form submission here
+    console.log("Submitting form", article);
   };
 
+  const allowedFileTypes = [
+    "image/jpeg",
+    "image/jpg",
+    "image/png",
+    "image/gif",
+    "video/mp4",
+    "video/webm",
+    "video/ogg",
+  ];
+
   const handleInputChange = (event) => {
-    console.log(event.target.id);
     switch (event.target.id) {
       case "title":
         setArticles((prev) => ({
@@ -37,23 +61,38 @@ const CreateNews = () => {
           selectedNewsType: event.target.value,
         }));
         break;
-      case "fileName":
+      case "file":
         const file = event.target.files[0];
         const maxFileSizeInBytes = 50 * 1024 * 1024;
         if (file) {
           if (file.size > maxFileSizeInBytes) {
-            setError("File size is exceeds the maximum allowed size.");
-            break;
+            setError("File size exceeds the maximum allowed size.");
+            return;
           }
-
           const fileType = file.type.split("/")[0];
-          if (fileType) {
+          setError("");
+
+          setArticles((prev) => ({
+            ...prev,
+            selectedMedia: {
+              selectedFile: file,
+              fileType: fileType,
+              fileSize: file.size,
+            },
+          }));
+
+          if (allowedFileTypes.includes(file.type)) {
+            if (fileType === "image") {
+              const reader = new FileReader();
+              reader.onloadend = () => {
+                setPreviewUrl(reader.result);
+              };
+              reader.readAsDataURL(file);
+            } else if (fileType === "video") {
+              setPreviewUrl(URL.createObjectURL(file));
+            }
           }
         }
-        setArticles((prev) => ({
-          ...prev,
-          fileName: event.target.value,
-        }));
         break;
       case "newsCategory":
         setArticles((prev) => ({
@@ -74,7 +113,7 @@ const CreateNews = () => {
         }));
         break;
       default:
-        console.log("Input is unknow form.");
+        console.log("Unknown input form.");
     }
   };
 
@@ -83,6 +122,10 @@ const CreateNews = () => {
       ...prev,
       content: content,
     }));
+  };
+
+  const handleCancelFile = (event) => {
+    setPreviewUrl("");
   };
 
   return (
@@ -133,11 +176,9 @@ const CreateNews = () => {
                 type="file"
                 id="file"
                 name="file"
-                value={article.fileName}
                 onChange={handleInputChange}
                 className="sr-only mt-2 p-3 bg-gray-200 focus:outline-none w-full border rounded-md"
                 accept="image/*, video/*"
-                required
               />
               <label
                 htmlFor="file"
@@ -145,6 +186,37 @@ const CreateNews = () => {
               >
                 Select Image or Video
               </label>
+              {error && <p className="text-red-500">{error}</p>}
+              {previewUrl && (
+                <div className="mt-2 flex justify-center relative">
+                  <button
+                    className="absolute right-2 cursor-pointer z-999"
+                    onClick={handleCancelFile}
+                  >
+                    x
+                  </button>
+                  {article.selectedMedia.fileType === "image" && (
+                    <img
+                      src={previewUrl}
+                      alt="Preview image"
+                      className="max-w-full h-96"
+                    />
+                  )}
+                  {article.selectedMedia.fileType === "video" && (
+                    <video
+                      src={previewUrl}
+                      className="w-100 object-cover"
+                      controls
+                    >
+                      <source
+                        src={previewUrl}
+                        type={article.selectedMedia.selectedFile.type}
+                      />
+                      Your browser does not support the video tag.
+                    </video>
+                  )}
+                </div>
+              )}
             </div>
             <TextEditor
               placeholder="Write Something..."
@@ -208,6 +280,14 @@ const CreateNews = () => {
                 onChange={handleInputChange}
                 className="mt-2 p-3 bg-gray-200 focus:outline-none w-full border rounded-md"
               />
+            </div>
+            <div className="mb-10">
+              <button
+                type="submit"
+                className="bg-blue-600 text-white w-full p-3 rounded-md"
+              >
+                Publish
+              </button>
             </div>
           </form>
         </div>
