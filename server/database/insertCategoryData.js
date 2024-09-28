@@ -1,16 +1,7 @@
 require("dotenv").config({ path: "../config.env" });
 const { Category } = require("../model/category");
+const populateDatabase = require("../utils/populateDatabase.JS");
 const mongoose = require("mongoose");
-
-const populateDatabase = async (data) => {
-  try {
-    await Category.deleteMany({});
-    await Category.insertMany(data);
-    console.log("Database populated successfully!");
-  } catch (error) {
-    console.error("Error populating database: ", error.message);
-  }
-};
 
 const start = async () => {
   try {
@@ -21,7 +12,7 @@ const start = async () => {
     await mongoose.connect(process.env.MONGO_URI);
     console.log("Connected to MongoDB Atlas");
 
-    const CategoryData = [
+    const categoryData = [
       {
         title: "World",
         items: [
@@ -99,7 +90,7 @@ const start = async () => {
       },
     ];
 
-    await populateDatabase(CategoryData);
+    await populateDatabase(categoryData, Category);
   } catch (error) {
     console.error("Database connection error: ", error.message);
   } finally {
