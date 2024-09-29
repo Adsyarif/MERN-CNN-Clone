@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { TextEditor } from "../../../components/Admin";
+import { useNewsOptions } from "../../../hooks";
 
 const CreateNews = () => {
   const [error, setError] = useState("");
+  const { newsTypes, newsCategories, newsSubCategories, newsTags } =
+    useNewsOptions();
   const [previewUrl, setPreviewUrl] = useState("");
-  const [newsOptions, setNewsOptions] = useState({
-    newsTypes: [],
-    newsCategories: [],
-    newsSubCategories: [],
-  });
   const [article, setArticles] = useState({
     title: "",
     selectedNewsType: "",
@@ -21,6 +19,7 @@ const CreateNews = () => {
     selectedNewsSubCategory: "",
     author: "",
     content: "",
+    selectedNewsTag: "",
   });
 
   useEffect(() => {
@@ -112,6 +111,12 @@ const CreateNews = () => {
           author: event.target.value,
         }));
         break;
+      case "newsTag":
+        setArticles((prev) => ({
+          ...prev,
+          selectedNewsTag: event.target.value,
+        }));
+        break;
       default:
         console.log("Unknown input form.");
     }
@@ -124,7 +129,7 @@ const CreateNews = () => {
     }));
   };
 
-  const handleCancelFile = (event) => {
+  const handleCancelFile = () => {
     setPreviewUrl("");
   };
 
@@ -161,7 +166,7 @@ const CreateNews = () => {
                 className="mt-2 p-3 bg-gray-200 focus:outline-none w-full border rounded-md"
               >
                 <option disabled>Select News Type</option>
-                {newsOptions.newsTypes.map((type) => (
+                {newsTypes.map((type) => (
                   <option key={type._id} value={type.name}>
                     {type.name}
                   </option>
@@ -239,7 +244,7 @@ const CreateNews = () => {
                 className="mt-2 p-3 bg-gray-200 focus:outline-none w-full border rounded-md"
               >
                 <option disabled>Select News Category</option>
-                {newsOptions.newsCategories.map((category) => (
+                {newsCategories.map((category) => (
                   <option key={category._id} value={category.name}>
                     {category.name}
                   </option>
@@ -261,9 +266,28 @@ const CreateNews = () => {
                 className="mt-2 p-3 bg-gray-200 focus:outline-none w-full border rounded-md"
               >
                 <option disabled>Select News Sub Category</option>
-                {newsOptions.newsSubCategories.map((subCategory) => (
+                {newsSubCategories.map((subCategory) => (
                   <option key={subCategory._id} value={subCategory.name}>
                     {subCategory.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="mb-10">
+              <label htmlFor="newsTag" className="block text-sm text-gray-600">
+                News Tag
+              </label>
+              <select
+                id="newsTag"
+                name="news-tag"
+                value={article.selectedNewsTag}
+                onChange={handleInputChange}
+                className="mt-2 p-3 bg-gray-200 focus:outline-none w-full border rounded-md"
+              >
+                <option disabled>Select News Tag</option>
+                {newsTags.map((newsTag) => (
+                  <option key={newsTag._id} value={newsTag.name}>
+                    {newsTag.name}
                   </option>
                 ))}
               </select>

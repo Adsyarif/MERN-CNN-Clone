@@ -1,0 +1,1 @@
+export { useNewsOptions } from "./newsOptions";

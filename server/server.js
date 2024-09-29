@@ -7,6 +7,8 @@ const dotenv = require("dotenv");
 dotenv.config({ path: "config.env" });
 const app = express();
 const PORT = process.env.PORT || 8080;
+const userRoutes = require("./router/user");
+const newsRoutes = require("./router/news");
 
 app.use(
   cors({
@@ -29,7 +31,8 @@ app.use(
 connectDB();
 
 app.use(bodyParser.json());
-app.use("/", require("./router/router"));
+app.use("/", userRoutes);
+app.use("/", newsRoutes);
 
 const server = app.listen(PORT, () => {
   console.log(`Server is running http://localhost:${PORT}`);

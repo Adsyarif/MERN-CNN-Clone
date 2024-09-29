@@ -20,7 +20,7 @@ const start = async () => {
       { name: "Photo Tiles" },
       { name: "Paid Content" },
       { name: "Advertisement" },
-      { name: "LiveUpdate" },
+      { name: "Live Update" },
     ];
 
     await populateDatabase(newsTypesData, Type);
