@@ -22,6 +22,8 @@ const CreateNews = () => {
     selectedNewsTag: "",
   });
 
+  console.log("categories:", newsCategories);
+
   useEffect(() => {
     return () => {
       if (previewUrl.startsWith("blob:")) {
@@ -245,8 +247,8 @@ const CreateNews = () => {
               >
                 <option disabled>Select News Category</option>
                 {newsCategories.map((category) => (
-                  <option key={category._id} value={category.name}>
-                    {category.name}
+                  <option key={category._id} value={category.title}>
+                    {category.title}
                   </option>
                 ))}
               </select>

@@ -13,9 +13,11 @@ export const useNewsOptions = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const typeResponse = await axios.get(`${BASE_URL}/api/types`);
-        // console.log(typeResponse.data);
-        // const categoryResponse = await axios.get(`${BASE_URL}/api/categories`);
+        const typeResponse = await axios.get(`${BASE_URL}/api/newsTypes`);
+        const categoryResponse = await axios.get(
+          `${BASE_URL}/api/newsCategories`
+        );
+        // console.log(categoryResponse);
         // const subCategoryResponse = await axios.get(
         //   `${BASE_URL}/api/subCategories`
         // );
@@ -23,7 +25,7 @@ export const useNewsOptions = () => {
 
         setNewsOptions({
           newsTypes: typeResponse.data,
-          // newsCategories: categoryResponse.data,
+          newsCategories: categoryResponse.data,
           // newsSubCategories: subCategoryResponse.data,
           // newsTags: newsTagsResponse.data,
         });
@@ -37,7 +39,7 @@ export const useNewsOptions = () => {
 
   return {
     newsTypes: newsOptions.newsTypes,
-    newsCategories: [],
+    newsCategories: newsOptions.newsCategories,
     newsSubCategories: [],
     newsTags: [],
   };
