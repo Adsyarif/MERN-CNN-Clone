@@ -4,6 +4,6 @@ const { getNewsType, getNewsCategory } = require("../controller/news");
 
 route.get("/api/newsTypes", getNewsType);
 route.get("/api/newsCategories", getNewsCategory);
-// route.post("/api/login", login);
+// route.get("/api/newsSubCategories", getNewsSubCategory);
 // route.get("/api/isAuth", isAuth);
 module.exports = route;

@@ -17,9 +17,9 @@ export const useNewsOptions = () => {
         const categoryResponse = await axios.get(
           `${BASE_URL}/api/newsCategories`
         );
-        // console.log(categoryResponse);
         // const subCategoryResponse = await axios.get(
         //   `${BASE_URL}/api/subCategories`
+        // console.log(categoryResponse);
         // );
         // const newsTagsResponse = await axios.get(`${BASE_URL}/api/newsTags`);
 

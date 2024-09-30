@@ -4,8 +4,8 @@ import { useNewsOptions } from "../../../hooks";
 
 const CreateNews = () => {
   const [error, setError] = useState("");
-  const { newsTypes, newsCategories, newsSubCategories, newsTags } =
-    useNewsOptions();
+  const { newsTypes, newsCategories, newsTags } = useNewsOptions();
+  const [newsSubCategories, setNewsSubCategories] = useState([]);
   const [previewUrl, setPreviewUrl] = useState("");
   const [article, setArticles] = useState({
     title: "",
@@ -22,7 +22,8 @@ const CreateNews = () => {
     selectedNewsTag: "",
   });
 
-  console.log("categories:", newsCategories);
+  console.log("subcategories:", newsSubCategories);
+  console.log("article:", article);
 
   useEffect(() => {
     return () => {
@@ -96,10 +97,18 @@ const CreateNews = () => {
         }
         break;
       case "newsCategory":
+        const categoryName = event.target.value;
         setArticles((prev) => ({
           ...prev,
-          selectedNewsCategory: event.target.value,
+          selectedNewsCategory: categoryName,
         }));
+
+        newsCategories.map((category) => {
+          if (category.title === categoryName) {
+            setNewsSubCategories(category.items);
+          }
+        });
+
         break;
       case "newsSubCategory":
         setArticles((prev) => ({
