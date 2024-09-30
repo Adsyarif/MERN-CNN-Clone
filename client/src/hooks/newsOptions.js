@@ -17,17 +17,12 @@ export const useNewsOptions = () => {
         const categoryResponse = await axios.get(
           `${BASE_URL}/api/newsCategories`
         );
-        // const subCategoryResponse = await axios.get(
-        //   `${BASE_URL}/api/subCategories`
-        // console.log(categoryResponse);
-        // );
-        // const newsTagsResponse = await axios.get(`${BASE_URL}/api/newsTags`);
+        const tagResponse = await axios.get(`${BASE_URL}/api/newsTags`);
 
         setNewsOptions({
           newsTypes: typeResponse.data,
           newsCategories: categoryResponse.data,
-          // newsSubCategories: subCategoryResponse.data,
-          // newsTags: newsTagsResponse.data,
+          newsTags: tagResponse.data,
         });
       } catch (error) {
         console.log(error);
@@ -41,6 +36,6 @@ export const useNewsOptions = () => {
     newsTypes: newsOptions.newsTypes,
     newsCategories: newsOptions.newsCategories,
     newsSubCategories: [],
-    newsTags: [],
+    newsTags: newsOptions.newsTags,
   };
 };

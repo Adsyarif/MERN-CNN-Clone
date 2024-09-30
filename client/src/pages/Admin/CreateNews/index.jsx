@@ -9,21 +9,18 @@ const CreateNews = () => {
   const [previewUrl, setPreviewUrl] = useState("");
   const [article, setArticles] = useState({
     title: "",
-    selectedNewsType: "",
+    selectedNewsType: "Select News Type",
     selectedMedia: {
       selectedFile: "",
       fileType: "",
       fileSize: "",
     },
-    selectedNewsCategory: "",
-    selectedNewsSubCategory: "",
+    selectedNewsCategory: "Select News Category",
+    selectedNewsSubCategory: "Select News Sub Category",
     author: "",
     content: "",
-    selectedNewsTag: "",
+    selectedNewsTag: "Select News Tag",
   });
-
-  console.log("subcategories:", newsSubCategories);
-  console.log("article:", article);
 
   useEffect(() => {
     return () => {
