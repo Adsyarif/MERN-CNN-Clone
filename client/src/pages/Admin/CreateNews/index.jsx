@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { TextEditor } from "../../../components/Admin";
 import { useNewsOptions } from "../../../hooks";
+import axios from "axios";
+import { BASE_URL } from "../../../lib/apis";
 
 const CreateNews = () => {
   const [error, setError] = useState("");
   const { newsTypes, newsCategories, newsTags } = useNewsOptions();
   const [newsSubCategories, setNewsSubCategories] = useState([]);
   const [previewUrl, setPreviewUrl] = useState("");
+  const [liveUpdateTypes, setLiveUpdateTypes] = useState({
+    liveUpdateTypesCollection: [],
+    selecetedLiveUpdateType: "",
+    liveUpdateHeadline: "",
+  });
   const [article, setArticles] = useState({
     title: "",
     selectedNewsType: "Select News Type",
@@ -46,6 +53,22 @@ const CreateNews = () => {
     "video/ogg",
   ];
 
+  useEffect(() => {
+    if (article.newsTypes === "Live Update") {
+      const getLiveUpdate = async () => {
+        const liveUpdateResponse = await axios.get(
+          `${BASE_URL}/api/lastFiveLiveUpdateType`
+        );
+
+        setLiveUpdateTypes((prev) => ({
+          ...prev,
+          liveUpdateTypesCollection: liveUpdateResponse.data,
+        }));
+      };
+      getLiveUpdate();
+    }
+  }, [article.newsTypes]);
+
   const handleInputChange = (event) => {
     switch (event.target.id) {
       case "title":
@@ -59,6 +82,7 @@ const CreateNews = () => {
           ...prev,
           selectedNewsType: event.target.value,
         }));
+
         break;
       case "file":
         const file = event.target.files[0];
@@ -141,6 +165,23 @@ const CreateNews = () => {
     setPreviewUrl("");
   };
 
+  const handleLiveUpdateTypeChange = (event) => {
+    const currentLiveUpdateTypeCollection =
+      liveUpdateTypes.liveUpdateTypesCollection;
+
+    currentLiveUpdateTypeCollection.map((type) => {
+      const typeLower = type.toLower.toLowerCase();
+      const newType = event.target.value.toLowerCase();
+      if (typeLower !== newType) {
+        currentLiveUpdateTypeCollection.push(event.target.value);
+      }
+    });
+    setLiveUpdateTypes((prev) => ({
+      ...prev,
+      liveUpdateTypesCollection: currentLiveUpdateTypeCollection,
+    }));
+  };
+
   return (
     <div className="mt-28">
       <div className="mx-auto bg-white drop-shadow-md w-10/12 rounded">
@@ -181,6 +222,130 @@ const CreateNews = () => {
                 ))}
               </select>
             </div>
+
+            {article.selectedNewsType === "LiveUpdate" && (
+              <>
+                {liveUpdateTypes.liveUpdateTypesCollection.length !== 0 ? (
+                  <div className=" bg-yellow-100 px-4 mb-10 rounded">
+                    <div className="flex justify-between py-5">
+                      <div className=" w-full">
+                        <label
+                          htmlFor="title"
+                          className="block text-sm font-medium text-gray-600"
+                        >
+                          Live Update News Type
+                        </label>
+                        <input
+                          type="text"
+                          id="LiveUpdateType"
+                          name="LiveUpdateType"
+                          placeholder="eg: e-sport"
+                          onChange={handleLiveUpdateTypeChange}
+                          className="mt-2 p-3 mr-2 bg-gray-200 focus:outline-none w-full border rounded-md"
+                          required
+                        />
+                      </div>
+                      <p className=" font-medium text-xs flex items-center mb-2 ml-2 text-gray-600">
+                        OR
+                      </p>
+                      <div className=" w-full">
+                        <label
+                          htmlFor="LiveUpdateType"
+                          className="block text-sm font-medium  ml-2.5 text-gray-600"
+                        >
+                          Live Update News Type
+                        </label>
+                        <select
+                          id="LiveUpdateType"
+                          name="LiveUpdateType"
+                          value={liveUpdateTypes.selecetedLiveUpdateType}
+                          onChange={handleLiveUpdateTypeChange}
+                          className="mt-2 p-[0.95rem] ml-2 bg-gray-200 focus:outline-none w-full border rounded-md"
+                        >
+                          <option value="" disabled>
+                            Select Live News Type
+                          </option>
+                          {liveUpdateTypes.liveUpdateTypesCollection.map(
+                            (type) => (
+                              <option key={type} value={type}>
+                                {type}
+                              </option>
+                            )
+                          )}
+                        </select>
+                      </div>
+                    </div>
+                    <div className="pb-5">
+                      <label
+                        htmlFor="title"
+                        className="block text-sm font-medium text-gray-600"
+                      >
+                        Live Update Main Headline
+                      </label>
+                      <input
+                        type="text"
+                        id="LiveUpdateType"
+                        name="LiveUpdateType"
+                        value={liveUpdateTypes.liveUpdateHeadline}
+                        onChange={(e) => {
+                          setLiveUpdateTypes((prev) => ({
+                            ...prev,
+                            liveUpdateHeadline: e.target.value,
+                          }));
+                        }}
+                        placeholder="Live Update Main Headline"
+                        className="mt-2 p-3 bg-gray-200 focus:outline-none w-full border rounded-md"
+                        required
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div className=" bg-yellow-200 px-4 mb-10 rounded">
+                    <div className="py-5">
+                      <label
+                        htmlFor="title"
+                        className="block text-sm font-medium text-gray-600"
+                      >
+                        Live Update News Type
+                      </label>
+                      <input
+                        type="text"
+                        id="LiveUpdateType"
+                        name="LiveUpdateType"
+                        placeholder="eg: e-sports"
+                        onChange={handleLiveUpdateTypeChange}
+                        className="mt-2 p-3 bg-gray-200 focus:outline-none w-full border rounded-md"
+                        required
+                      />
+                    </div>
+                    <div className="pb-5">
+                      <label
+                        htmlFor="title"
+                        className="block text-sm font-medium text-gray-600"
+                      >
+                        Live Update Main Headline
+                      </label>
+                      <input
+                        type="text"
+                        id="LiveUpdateType"
+                        name="LiveUpdateType"
+                        value={liveUpdateTypes.liveUpdateHeadline}
+                        onChange={(e) => {
+                          setLiveUpdateTypes((prev) => ({
+                            ...prev,
+                            liveUpdateHeadline: e.target.value,
+                          }));
+                        }}
+                        placeholder="Live Update Main Headline"
+                        className="mt-2 p-3 bg-gray-200 focus:outline-none w-full border rounded-md"
+                        required
+                      />
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
+
             <div className="mb-10">
               <label className="block text-sm font-medium text-gray-600">
                 Upload File

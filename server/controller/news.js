@@ -29,6 +29,12 @@ exports.getNewsTag = async (req, res) => {
     apiResponse(res, 500, "Internal servcer error.");
   }
 };
+exports.getLastFiveLiveUpdateType = async (req, res) => {
+  try {
+  } catch (error) {
+    apiResponse(res, 500, "Internal servcer error.");
+  }
+};
 
 // SSR SUB CATEGORies
 // exports.getNewsSubCategory = async (req, res) => {
